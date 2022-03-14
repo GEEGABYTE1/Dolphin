@@ -68,7 +68,47 @@ class FIFO:
             index += 1
 
         return self.history_queues, self.history_vals
-            
-            
-test = FIFO()
-print(test())
+
+
+class two_way:
+    def __init__(self):
+        data_vals = str(input(': '))
+        data_vals = data_vals.split(',')
+        self.data = []
+        for character in data_vals:
+            self.data.append(int(character))
+
+        self.cache = Cache()
+        self.history_queues = []
+        self.history_vals = []
+
+        result = self.fifo(self.data)
+        print(result)
+
+    def two_way(self, data):
+        set0 = Cache()
+        set1 = Cache()
+
+        set_0_vals = []
+        set_1_vals = []
+        for value in data:
+            if value % 2 == 0:
+                if value not in set_0_vals:
+                    print(colored('MISS', 'red'))
+                    print('-'*24)
+                    set_0_vals.append(value)
+                    set0.enqueue(value)
+                else:
+                    print(colored('HIT', 'green'))
+                    print('-'*24)
+                    continue 
+            else:
+                if value not in set_1_vals:
+                    print(colored('MISS', 'red'))
+                    print('-'*24)
+                    set_1_vals.append(value)
+                    set1.enqueue(value)
+                else:
+                    print('HIT', 'green')
+                    print('-'*24)
+                    continue 
