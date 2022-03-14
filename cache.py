@@ -12,7 +12,7 @@ class Node:
     def set_link(self, new_link):
         self.link = new_link 
 
-class Q:
+class Cache:
     def __init__(self, limit=None):
         self.limit = limit 
         self.size = 0

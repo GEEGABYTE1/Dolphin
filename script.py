@@ -1,5 +1,6 @@
-from queue import Q
+from cache import Cache, Node
 from termcolor import colored
+
 
 
 
@@ -12,31 +13,39 @@ class FIFO:
         for character in data_vals:
             self.data.append(int(character))
 
-        self.cache = Q()
+        self.cache = Cache()
         self.history_queues = []
-        self.histroy_vals = []
+        self.history_vals = []
 
-        self.fifo(self.data)
+        result = self.fifo(self.data)
+        print(result)
 
         
     def fifo(self, values):
         current_cache_vals = []
+        index = 0
         for value in values:
+            
+            if index >= 4:
+                index = 0
+
             if self.cache.size == 4:
-                self.histroy_queues.append(self.cache)
-                self.history_vals.append(current_cache_vals)
-                newcache = Q()
-                self.cache = newcache
-                new_cache_vals = []
-                current_cache_vals = new_cache_vals
-            elif value in current_cache_vals:
+                new_node = Node(value)
+                new_node.set_link(self.cache.head_node)
+                self.cache.head_node = new_node
+                self.cache.size += 1
+                current_cache_vals[index] = value
+                
+                
+            if value in current_cache_vals:
                 print(colored('HIT', 'cyan'))
                 print('-'*24)
             else:
                 print(colored('MISS', 'red'))
                 print('-'*24)
             self.cache.enqueue(value)
-            current_cache_vals.append(self.cache)
+            current_cache_vals.append(value)
+            index += 1
 
         return self.history_queues, self.history_vals
             
