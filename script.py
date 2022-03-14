@@ -91,24 +91,44 @@ class two_way:
 
         set_0_vals = []
         set_1_vals = []
+        index0 = 0
+        index1 = 0
+        
         for value in data:
             if value % 2 == 0:
+                if index0 >= 4:
+                    index = 0 
+                if set0.size >= 4:
+                    counter = 0 
+                    current_node = set0.head_node 
+                    while current_node:
+                        if counter == index0:
+                            current_node.value == value 
+                            break 
+                        else:
+                            counter += 1
+                    set_0_vals[index0] = value
+
                 if value not in set_0_vals:
                     print(colored('MISS', 'red'))
                     print('-'*24)
                     set_0_vals.append(value)
                     set0.enqueue(value)
+                    
                 else:
                     print(colored('HIT', 'green'))
                     print('-'*24)
                     continue 
+                index0 += 1
             else:
                 if value not in set_1_vals:
                     print(colored('MISS', 'red'))
                     print('-'*24)
                     set_1_vals.append(value)
                     set1.enqueue(value)
+                    
                 else:
                     print('HIT', 'green')
                     print('-'*24)
                     continue 
+                index1 += 1
