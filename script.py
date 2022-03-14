@@ -97,13 +97,13 @@ class two_way:
         for value in data:
             if value % 2 == 0:
                 if index0 >= 4:
-                    index = 0 
+                    index0 = 0 
                 if set0.size >= 4:
                     counter = 0 
                     current_node = set0.head_node 
                     while current_node:
                         if counter == index0:
-                            current_node.value == value 
+                            current_node.value = value 
                             break 
                         else:
                             counter += 1
@@ -121,6 +121,19 @@ class two_way:
                     continue 
                 index0 += 1
             else:
+                if index1 >= 4:
+                    index1 = 0 
+                if set1.size >= 4:
+                    counter = 0 
+                    current_node = set1.head_node
+                    while current_node:
+                        if counter == index1:
+                            current_node.value = value 
+                            break 
+                        else:
+                            counter += 1
+                    set_1_vals[index1] = value
+            
                 if value not in set_1_vals:
                     print(colored('MISS', 'red'))
                     print('-'*24)
