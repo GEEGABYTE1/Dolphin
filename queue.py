@@ -1,18 +1,18 @@
 class Node:
-            def __init__(self, value, link=None):
-                self.value = value 
-                self.link = link 
+    def __init__(self, value, link=None):
+        self.value = value 
+        self.link = link 
 
-            def get_value(self):
-                return self.value 
+    def get_value(self):
+        return self.value 
 
-            def get_link(self):
-                return self.link 
+    def get_link(self):
+        return self.link 
 
-            def set_link(self, new_link):
-                self.link = new_link 
+    def set_link(self, new_link):
+        self.link = new_link 
 
-class Queue:
+class Q:
     def __init__(self, limit=None):
         self.limit = limit 
         self.size = 0
@@ -61,3 +61,4 @@ class Queue:
             return item_to_remove.get_value()
         else:
             print("The Queue Is Empty")
+
