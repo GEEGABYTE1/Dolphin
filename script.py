@@ -2,7 +2,7 @@ from queue import Queue
 from termcolor import colored
 
 
-cache = Queue()
+
 
 class FIFO:
     def __init__(self):
@@ -11,10 +11,13 @@ class FIFO:
         self.data = []
         for character in data_vals:
             self.data.append(int(character))
-        self.fifo(self.data)
 
+        self.cache = Queue()
         self.history_queues = []
         self.histroy_vals = []
+
+        self.fifo(self.data)
+
         
     def fifo(self, values):
         current_cache_vals = []
@@ -38,3 +41,5 @@ class FIFO:
         return self.history_queues, self.history_vals
             
             
+test = FIFO()
+print(test())
