@@ -1,7 +1,7 @@
-from stack import Stack 
+from queue import Queue
 
 
-cache = Stack()
+cache = Queue()
 
 class FIFO:
     def __init__(self):
@@ -10,5 +10,10 @@ class FIFO:
         self.data = []
         for character in data_vals:
             self.data.append(int(character))
+        self.fifo(self.data)
 
         
+    def fifo(self, values):
+        for value in values:
+            
+            
