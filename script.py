@@ -1,11 +1,12 @@
 from cache import Cache, Node
 from termcolor import colored
+import random
 
 
 
 
 
-class FIFO:                                         # FIFO with n-way 
+class FIFO:                                         # FIFO 
     def __init__(self):
         data_vals = str(input(': '))
         data_vals = data_vals.split(',')
@@ -84,7 +85,7 @@ class two_way:                          #FIFO Two-Way
         result = self.two_way(self.data)
         print(result)
 
-    def two_way(self, data):
+    def two_way(self, data):        #n-way (2)
         set0 = Cache()
         set1 = Cache()
 
@@ -180,7 +181,53 @@ class Random:
         print(result)
     
     def random(self, data):
-        pass
+        cache = Cache()
+        cache_vals = []
+        for value in range(4):
+            cache.enqueue(None)
+        
+        for value in data:
+            random_idx = random.randint(0, 3)
+            current_node = cache.head_node 
+            counter = 1
+            if value in cache_vals:
+                print(colored('HIT', 'cyan'))
+                print(cache_vals)
+                print('-'*24)
+                continue 
+            else:
+                print(colored('MISS', 'red'))
+            if random_idx == counter:
+                counter = 0 
+                current_node = current_node.head_node
+                while current_node:
+                    if counter == random_idx:
+                        current_node.value = value
+                    else:
+                        counter += 1
+            
+            cache_vals[random_idx] = value
+            print(cache_vals)
+            print('-'*24)
+            
+        return cache_vals
+
+                
+            
+
+        
+        
+
+
+        
+            
+
+                
+                
+                
+            
+
+        
 
 
 test = two_way()
