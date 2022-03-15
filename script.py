@@ -5,7 +5,7 @@ from termcolor import colored
 
 
 
-class FIFO:
+class FIFO:                                         # FIFO with n-way 
     def __init__(self):
         data_vals = str(input(': '))
         data_vals = data_vals.split(',')
@@ -73,7 +73,7 @@ class FIFO:
         return self.history_queues, self.history_vals
 
 
-class two_way:
+class two_way:                          #FIFO Two-Way
     def __init__(self):
         data_vals = str(input(': '))
         data_vals = data_vals.split(',')
@@ -166,6 +166,22 @@ class two_way:
                 print('-'*24)
         
         return set0, set1
+
+class Random:
+    # Full associative with Random Replacement
+    def __init__(self):
+        data_vals = str(input(': '))
+        data_vals = data_vals.split(',')
+        self.data = []
+        for character in data_vals:
+            self.data.append(int(character))
+
+        result = self.two_way(self.data)
+        print(result)
+    
+    def random(self, data):
+        pass
+
 
 test = two_way()
 print(test)
