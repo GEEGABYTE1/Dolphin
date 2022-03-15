@@ -125,8 +125,7 @@ class two_way:
                 if value not in set_1_vals:
                     print(colored('MISS', 'red'))
                     print('-'*24)
-                    set_1_vals.append(value)
-                    set1.enqueue(value)
+                    
                     
                 else:
                     print(colored('HIT', 'green'))
@@ -145,6 +144,9 @@ class two_way:
                         else:
                             counter += 1
                     set_1_vals[index1] = value
+                else:
+                    set_1_vals.append(value)
+                    set1.enqueue(value)
             
                 
                 index1 += 1
