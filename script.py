@@ -28,11 +28,12 @@ class FIFO:
 
             if value in current_cache_vals:
                 print(colored('HIT', 'cyan'))
+                print(current_cache_vals)
                 print('-'*24)
                 continue
             elif len(current_cache_vals) != 0:
                 print(colored('MISS', 'red'))
-                print('-'*24)
+                
             
             if index >= 4:
                 index = 0
@@ -64,6 +65,8 @@ class FIFO:
                 
                 self.cache.enqueue(value)
             
+            print(current_cache_vals)
+            print('-'*24)
             current_cache_vals[index] = value
             index += 1
 
@@ -95,12 +98,15 @@ class two_way:
 
                 if value not in set_0_vals:
                     print(colored('MISS', 'red'))
-                    print('-'*24)
+                    
                     
                     
                 else:
                     print(colored('HIT', 'green'))
+                    string = str(set_0_vals) + ' ' +  str(set_1_vals)
+                    print(string)
                     print('-'*24)
+                    
                     continue 
 
                 if index0 >= 2:
@@ -121,14 +127,19 @@ class two_way:
 
                 
                 index0 += 1
+                string = str(set_0_vals) + ' ' +  str(set_1_vals)
+                print(string)
+                print('-'*24)
             else:
                 if value not in set_1_vals:
                     print(colored('MISS', 'red'))
-                    print('-'*24)
+                    
                     
                     
                 else:
                     print(colored('HIT', 'green'))
+                    string = str(set_0_vals) + ' ' +  str(set_1_vals)
+                    print(string)
                     print('-'*24)
                     continue 
 
@@ -150,8 +161,11 @@ class two_way:
             
                 
                 index1 += 1
+                string = str(set_0_vals) + ' ' +  str(set_1_vals)
+                print(string)
+                print('-'*24)
         
         return set0, set1
 
 test = two_way()
-print(test())
+print(test)
