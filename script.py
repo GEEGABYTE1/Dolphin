@@ -177,12 +177,12 @@ class Random:
         for character in data_vals:
             self.data.append(int(character))
 
-        result = self.two_way(self.data)
+        result = self.random(self.data)
         print(result)
     
     def random(self, data):
         cache = Cache()
-        cache_vals = []
+        cache_vals = [None for i in range(4)]
         for value in range(4):
             cache.enqueue(None)
         
@@ -197,14 +197,15 @@ class Random:
                 continue 
             else:
                 print(colored('MISS', 'red'))
-            if random_idx == counter:
-                counter = 0 
-                current_node = current_node.head_node
-                while current_node:
-                    if counter == random_idx:
-                        current_node.value = value
-                    else:
-                        counter += 1
+            current_node = cache.head_node
+            counter = 0 
+            while current_node:
+                if random_idx == counter:
+                    current_node.value = value 
+                    break 
+                else:
+                    current_node = current_node.get_link()
+                    counter += 1
             
             cache_vals[random_idx] = value
             print(cache_vals)
@@ -213,9 +214,8 @@ class Random:
         return cache_vals
 
                 
-            
-
-        
+test = Random()
+print(test)
         
 
 
