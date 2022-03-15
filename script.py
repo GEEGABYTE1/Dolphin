@@ -78,11 +78,7 @@ class two_way:
         for character in data_vals:
             self.data.append(int(character))
 
-        self.cache = Cache()
-        self.history_queues = []
-        self.history_vals = []
-
-        result = self.fifo(self.data)
+        result = self.two_way(self.data)
         print(result)
 
     def two_way(self, data):
@@ -96,9 +92,20 @@ class two_way:
         
         for value in data:
             if value % 2 == 0:
-                if index0 >= 4:
+
+                if value not in set_0_vals:
+                    print(colored('MISS', 'red'))
+                    print('-'*24)
+                    
+                    
+                else:
+                    print(colored('HIT', 'green'))
+                    print('-'*24)
+                    continue 
+
+                if index0 >= 2:
                     index0 = 0 
-                if set0.size >= 4:
+                if set0.size >= 2:
                     counter = 0 
                     current_node = set0.head_node 
                     while current_node:
@@ -108,22 +115,27 @@ class two_way:
                         else:
                             counter += 1
                     set_0_vals[index0] = value
-
-                if value not in set_0_vals:
-                    print(colored('MISS', 'red'))
-                    print('-'*24)
+                else:
                     set_0_vals.append(value)
                     set0.enqueue(value)
+
+                
+                index0 += 1
+            else:
+                if value not in set_1_vals:
+                    print(colored('MISS', 'red'))
+                    print('-'*24)
+                    set_1_vals.append(value)
+                    set1.enqueue(value)
                     
                 else:
                     print(colored('HIT', 'green'))
                     print('-'*24)
                     continue 
-                index0 += 1
-            else:
-                if index1 >= 4:
+
+                if index1 >= 2:
                     index1 = 0 
-                if set1.size >= 4:
+                if set1.size >= 2:
                     counter = 0 
                     current_node = set1.head_node
                     while current_node:
@@ -134,14 +146,10 @@ class two_way:
                             counter += 1
                     set_1_vals[index1] = value
             
-                if value not in set_1_vals:
-                    print(colored('MISS', 'red'))
-                    print('-'*24)
-                    set_1_vals.append(value)
-                    set1.enqueue(value)
-                    
-                else:
-                    print('HIT', 'green')
-                    print('-'*24)
-                    continue 
+                
                 index1 += 1
+        
+        return set0, set1
+
+test = two_way()
+print(test())
