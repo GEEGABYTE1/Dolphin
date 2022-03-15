@@ -1,3 +1,4 @@
+from threading import currentThread
 from cache import Cache, Node
 from termcolor import colored
 import random
@@ -189,7 +190,7 @@ class Random:
         for value in data:
             random_idx = random.randint(0, 3)
             current_node = cache.head_node 
-            counter = 1
+            counter = 0
             if value in cache_vals:
                 print(colored('HIT', 'cyan'))
                 print(cache_vals)
@@ -200,12 +201,12 @@ class Random:
             current_node = cache.head_node
             counter = 0 
             while current_node:
-                if random_idx == counter:
+                if counter == random_idx:
                     current_node.value = value 
-                    break 
+                    break
                 else:
-                    current_node = current_node.get_link()
                     counter += 1
+                    current_node = current_node.get_link()
             
             cache_vals[random_idx] = value
             print(cache_vals)
