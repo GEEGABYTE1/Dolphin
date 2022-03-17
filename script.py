@@ -1,4 +1,5 @@
 from array import array
+from dataclasses import replace
 from threading import currentThread
 from cache import Cache, Node
 from termcolor import colored
@@ -238,6 +239,13 @@ class LRU:
         cache_array = [None for i in range(4)]
         for num in range(4):
             cache.enqueue(None)
+        
+        for key in list(cache_tracker.keys()):
+            memory.setter(key, None)
+
+
+
+        replacement = False
 
         for value in data:
             if value in cache_array:
@@ -253,7 +261,12 @@ class LRU:
                 array_cache = 0 
             else:
                 array_cache = least_used_cache - 1 #(To prevent Index Error)
+            if cache_array[array_cache] == None:
+                pass 
+            else:
+                replacement = True
             cache_array[array_cache] = value 
+            
 
             current_node = cache.head_node
             counter = 1
@@ -264,12 +277,16 @@ class LRU:
                 else:
                     current_node = current_node.get_link()
                     counter += 1
-            dt = datetime.today()
-            time_ran = dt.timestamp()
-            memory.setter(str(time_ran), value)
+
+            if replacement == True: # Write-Back Policy
+                memory.setter(str(least_used_cache), value)
+                print(colored('Memory Write', 'green'))
+            
+            
             cache_tracker[str(least_used_cache)] += 1
             print(cache_array)
             print('-'*24)
+            replacement = False
         
         return cache
             
