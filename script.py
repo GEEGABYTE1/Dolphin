@@ -187,9 +187,13 @@ class Random:
     
     def random(self, data):
         cache = Cache()
+        number_of_memory_blocks = len(data)
+        memory = HashMap(number_of_memory_blocks + 5)
+
         cache_vals = [None for i in range(4)]
         for value in range(4):
             cache.enqueue(None)
+        
         
         for value in data:
             random_idx = random.randint(0, 3)
@@ -212,6 +216,9 @@ class Random:
                     counter += 1
                     current_node = current_node.get_link()
             
+            dt = datetime.today()               # Write Through Policy
+            seconds = dt.timestamp()
+            memory.setter(str(seconds), value)
             cache_vals[random_idx] = value
             print(cache_vals)
             print('-'*24)
@@ -240,10 +247,6 @@ class LRU:
         for num in range(4):
             cache.enqueue(None)
         
-        for key in list(cache_tracker.keys()):
-            memory.setter(key, None)
-
-
 
         replacement = False
 
