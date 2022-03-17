@@ -219,6 +219,7 @@ class Random:
             dt = datetime.today()               # Write Through Policy
             seconds = dt.timestamp()
             memory.setter(str(seconds), value)
+            print(colored('Memory Write', 'green'))
             cache_vals[random_idx] = value
             print(cache_vals)
             print('-'*24)
