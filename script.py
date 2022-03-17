@@ -214,6 +214,36 @@ class Random:
             
         return cache_vals
 
+
+class LRU:
+    def __init__(self):
+        data_vals = str(input(': '))
+        data_vals = data_vals.split(',')
+        self.data = []
+        for character in data_vals:
+            self.data.append(int(character))
+
+        result = self.lru(self.data)
+        print(result)
+
+    def lru(self, data):
+        cache = Cache()
+        cache_tracker = {'1':0, '2':0, '3':0, '4':0}
+
+        cache_array = []
+
+        for value in data:
+            if value in cache_array:
+                print(colored('HIT', 'cyan'))
+                print(cache_array)
+                print('-'*24)
+                continue
+            else:
+                print(colored('MISS', 'red'))
+                
+            
+
+
                 
 test = Random()
 print(test)
