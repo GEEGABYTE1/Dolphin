@@ -1,6 +1,7 @@
 from threading import currentThread
 from cache import Cache, Node
 from termcolor import colored
+from hashmap import HashMap
 import random
 
 
@@ -230,7 +231,7 @@ class LRU:
         cache = Cache()
         cache_tracker = {'1':0, '2':0, '3':0, '4':0}
 
-        cache_array = []
+        cache_array = [None for i in range(4)]
 
         for value in data:
             if value in cache_array:
@@ -240,6 +241,25 @@ class LRU:
                 continue
             else:
                 print(colored('MISS', 'red'))
+            
+            least_used_cache = int(self.cache_block_sorter(cache_tracker))
+            array_cache = least_used_cache - 1 #(To prevent Index Error)
+            cache_array[array_cache] = value 
+
+            current_node = cache.head_node
+            counter = 0 
+            while current_node:
+                if counter == least_used_cache:
+                    current_node.value = value 
+                    break
+                else:
+                    current_node = current_node.get_link()
+                    counter += 1
+        
+        return cache
+            
+            
+
             
     
     def cache_block_sorter(self, cache_tracker):
