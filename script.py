@@ -240,6 +240,17 @@ class LRU:
                 continue
             else:
                 print(colored('MISS', 'red'))
+            
+    
+    def cache_block_sorter(self, cache_tracker):
+        vals = list(cache_tracker.values())
+        vals_sorted = sorted(vals)
+        least_used_cache_block = vals_sorted[0]
+        for key, value in cache_tracker.items():
+            if value == least_used_cache_block:
+                return key 
+            else:
+                continue 
                 
             
 
