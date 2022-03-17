@@ -36,8 +36,14 @@ With the Random Replacement, a Write-Policy has been implemented called Write-Th
 
 # LRU
 
-
+This policy is unique compared to the other ones. The class `LRU` imitates the nature of *Least Recently Used* Replacement where the entry with the most time passed since it was last accessed. 
 
 ## Direct-Mapped
 
+It made sense that by the complexity of the LRU, to keep the program simple, a direct-mapped approach had to be used. 
+
+This association is where every location in the main memory can only be placed in *one* specified block in the cache.
+
 ## Write-Back Policy
+
+Although Direct-Mapped associativity does not need write-back policies

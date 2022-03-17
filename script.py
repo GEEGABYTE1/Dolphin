@@ -28,9 +28,12 @@ class FIFO:                                         # FIFO
 
         
     def fifo(self, values):
+        number_of_memory_blocks = len(values)
+        memory = HashMap(number_of_memory_blocks + 5)
         current_cache_vals = []
         index = 0
         for value in values:
+            replacement = False
 
             if value in current_cache_vals:
                 print(colored('HIT', 'cyan'))
@@ -65,11 +68,16 @@ class FIFO:                                         # FIFO
                             counter += 1
                             
                 self.cache.size += 1
+                replacement = True 
                        
             else:          
                 current_cache_vals.append(value)
                 
                 self.cache.enqueue(value)
+
+            if replacement == True:
+                memory.setter(str(index), value)
+                print(colored('Memory Write', 'green'))
             
             print(current_cache_vals)
             print('-'*24)
@@ -240,17 +248,13 @@ class LRU:
 
     def lru(self, data):
         cache = Cache()
-        number_of_memory_blocks = len(data)
-        memory = HashMap(number_of_memory_blocks + 5)
         cache_tracker = {'1':0, '2':0, '3':0, '4':0}
 
         cache_array = [None for i in range(4)]
         for num in range(4):
             cache.enqueue(None)
+    
         
-
-        replacement = False
-
         for value in data:
             if value in cache_array:
                 print(colored('HIT', 'cyan'))
@@ -282,9 +286,6 @@ class LRU:
                     current_node = current_node.get_link()
                     counter += 1
 
-            if replacement == True: # Write-Back Policy
-                memory.setter(str(least_used_cache), value)
-                print(colored('Memory Write', 'green'))
             
             
             cache_tracker[str(least_used_cache)] += 1
