@@ -17,6 +17,12 @@ Set 0 are for values that are multiples of 2, and Set 1 are for the rest.
 
 *Note*: The size of the Memory depends on the number of data values the uesr inputs.
 
+## Write-Back Policy
+
+The FIFO structure has an integrated write-back policy, where it will only write the data to the main memory when the memory address in the associated cache entry is written.
+
+Since our memory is a hashmap, we only have 4 memory blocks in this case (1 - 4). This is to keep each value organized and make the replacement easy.
+
 
 # Random Replacement
 
@@ -44,6 +50,10 @@ It made sense that by the complexity of the LRU, to keep the program simple, a d
 
 This association is where every location in the main memory can only be placed in *one* specified block in the cache.
 
-## Write-Back Policy
+# More Information
 
-Although Direct-Mapped associativity does not need write-back policies
+Each Cache is in the form of a Stack and an Array for comparision factors.
+
+The Memory is a Hashmap for fetching and setting values.
+
+If you have questions, or concerns, feel free to reach out to me! 
