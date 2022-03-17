@@ -2,6 +2,7 @@ from threading import currentThread
 from cache import Cache, Node
 from termcolor import colored
 from hashmap import HashMap
+from datetime import datetime
 import random
 
 
@@ -229,6 +230,8 @@ class LRU:
 
     def lru(self, data):
         cache = Cache()
+        number_of_memory_blocks = len(data)
+        memory = HashMap(number_of_memory_blocks + 5)
         cache_tracker = {'1':0, '2':0, '3':0, '4':0}
 
         cache_array = [None for i in range(4)]
@@ -255,6 +258,9 @@ class LRU:
                 else:
                     current_node = current_node.get_link()
                     counter += 1
+            dt = datetime.today()
+            time_ran = dt.timestamp()
+            memory.setter(str(time_ran), value)
         
         return cache
             
