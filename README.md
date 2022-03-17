@@ -18,14 +18,25 @@ Set 0 are for values that are multiples of 2, and Set 1 are for the rest.
 *Note*: The size of the Memory depends on the number of data values the uesr inputs.
 
 
-# Random
+# Random Replacement
+
+This policy chooses a cache entry at random. The program uses the default `Random` Library to fetch a random index.
+
+It should be noted that the random replacements policy is simple, but might cause more cache misses than the other 2 policies.
 
 ## Full Associative
 
+Along with the Random Replacement Implementation, each location in the main memory can go to any block in the cache -> called Fully Associative.
+
+*Note*: Associating Memory locations to specified cache blocks is called cache *associativity*.
+
 ## Write-Through Policy
 
+With the Random Replacement, a Write-Policy has been implemented called Write-Through. Unlike Write-Back, the write-through policy will write the data to the main memory at the same time it is written to cache.
 
 # LRU
+
+
 
 ## Direct-Mapped
 
