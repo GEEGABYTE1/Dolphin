@@ -1,3 +1,4 @@
+from array import array
 from threading import currentThread
 from cache import Cache, Node
 from termcolor import colored
@@ -235,6 +236,8 @@ class LRU:
         cache_tracker = {'1':0, '2':0, '3':0, '4':0}
 
         cache_array = [None for i in range(4)]
+        for num in range(4):
+            cache.enqueue(None)
 
         for value in data:
             if value in cache_array:
@@ -246,11 +249,14 @@ class LRU:
                 print(colored('MISS', 'red'))
             
             least_used_cache = int(self.cache_block_sorter(cache_tracker))
-            array_cache = least_used_cache - 1 #(To prevent Index Error)
+            if least_used_cache == 0:
+                array_cache = 0 
+            else:
+                array_cache = least_used_cache - 1 #(To prevent Index Error)
             cache_array[array_cache] = value 
 
             current_node = cache.head_node
-            counter = 0 
+            counter = 1
             while current_node:
                 if counter == least_used_cache:
                     current_node.value = value 
@@ -261,11 +267,11 @@ class LRU:
             dt = datetime.today()
             time_ran = dt.timestamp()
             memory.setter(str(time_ran), value)
+            cache_tracker[str(least_used_cache)] += 1
+            print(cache_array)
+            print('-'*24)
         
         return cache
-            
-            
-
             
     
     def cache_block_sorter(self, cache_tracker):
@@ -282,7 +288,7 @@ class LRU:
 
 
                 
-test = Random()
+test = LRU()
 print(test)
         
 
